@@ -10,8 +10,8 @@ class User extends React.Component {
                     {
                         payload.items.map(item => {
                             return (
-                                <Content key={item.id}
-                                    title={item.title}
+                                <Content key = {item.id}
+                                    email={item.email}
                                     payload={this.props.payload}
                                 />
                             )

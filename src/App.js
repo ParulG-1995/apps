@@ -1,58 +1,67 @@
-import React from 'react';
-import './App.css'
+import React from "react";
 import { NavLink } from 'react-router-dom'
 import User from './User'
-import uuid from 'uuid'
+import { Button, FormGroup, FormControl } from "react-bootstrap";
+import "./Login.css";
 
-class App extends React.Component {
+export default class Login extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: "",
+      email: "",
       items: [],
-      id: uuid()
     }
+    this.validateForm = this.validateForm.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
-  handleChange = (e) => {
-    this.setState({
-      title: e.target.value
-    })
+  validateForm = (email, password) => {
+    return (email.length > 0 && password.length > 0);
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault();
+  handleSubmit = (event) => {
+    event.preventDefault();
     const newItem = {
-      title: this.state.title,
-      id: this.state.id
+      email: this.state.email
     }
-   
-    const updatedItem = [...this.state.items, newItem];
-    console.log(updatedItem)
-    this.setState({
-      items: updatedItem,
-      id: uuid(),
-      title: ''
-    })
 
+    const updatedItem = [... this.state.items, newItem];
+    this.setState({
+      email: "",
+      items: updatedItem
+    })
   }
   render() {
     return (
-      <div className="container">
-        <div className="App">
-          <h2>Please, sign-in</h2>
-          <span>Name:</span>
-          <input type="text" value={this.state.title} className="form-control" onChange={this.handleChange}></input>
-          <br />
-          <span>Password:</span>
-          <input type="password"></input>
-          <br />
-          <button type="button" onSubmit={this.handleSubmit}><NavLink to="/page">Sign-in</NavLink></button>
-        </div>
+      <div className="Login">
+        <form onSubmit={this.handleSubmit}>
+          <FormGroup controlId="email" bsSize="large">
+            <span>Email:</span>
+            <FormControl
+              autoFocus
+              type="email"
+              value={this.state.email}
+              onChange={e => this.setState({ email: e.target.value })}
+            />
+          </FormGroup>
+          <FormGroup controlId="password" bsSize="large">
+            <span>Password:</span>
+            <FormControl
+              value={this.state.password}
+              onChange={e => this.setState({ password: e.target.value })}
+              type="password"
+            />
+          </FormGroup>
+          <NavLink to="/page">
+            <Button block bsSize="large" disabled={!this.validateForm} type="submit">
+              Sign-in
+          </Button>
+          </NavLink>
+        </form>
         <User payload={this.state} />
       </div>
-    )
-
+    );
   }
+
 }
 
-export default App;
+
