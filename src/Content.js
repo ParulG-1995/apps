@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 class Content extends React.Component {
     render() {
-        const { email } = this.props;
+        const {payload } = this.props;
         return (
             <div className="table-responsive height">
                 <tbody className="width">

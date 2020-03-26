@@ -1,26 +1,13 @@
 import React from 'react'
-import Content from './Content'
+//import Content from './Content'
 
-class User extends React.Component {
-    render() {
-        const { payload } = this.props
-        return (
-            <div>
-                <table className="table table-striped table-bordered table-hover">
-                    {
-                        payload.items.map(item => {
-                            return (
-                                <Content key = {item.id}
-                                    email={item.email}
-                                    payload={this.props.payload}
-                                />
-                            )
-                        })
-                    }
-                </table>
-            </div>
-        )
-    }
+function User(props) {
+    const {payload} = props;
+    const listItems = payload.items.map((item) => <li>{item}</li>); 
+    return (
+        <ul>{listItems}</ul>);
 }
+    
+
 
 export default User

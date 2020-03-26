@@ -13,7 +13,7 @@ class Home extends React.Component {
                     <Switch>
                         <Route path="/" component={Login} exact />
                         <Route path="/page" component={Page} />
-                        <Route path="/user" component={User} />
+                        <Route path="/user" exact component={User} />
                     </Switch>
                 </BrowserRouter>
             </div>
